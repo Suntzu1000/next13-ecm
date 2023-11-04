@@ -15,19 +15,19 @@ export async function POST(
     const { name, billboardId } = body;
 
     if (!userId) {
-      return new NextResponse("Unauthenticated", { status: 403 });
+      return new NextResponse("Não autenticado", { status: 403 });
     }
 
     if (!name) {
-      return new NextResponse("Name is required", { status: 400 });
+      return new NextResponse("Nome obrigatório", { status: 400 });
     }
     
     if (!billboardId) {
-      return new NextResponse("Billboard ID is required", { status: 400 });
+      return new NextResponse("O ID do outdoor é obrigatório", { status: 400 });
     }
 
     if (!params.storeId) {
-      return new NextResponse("Store id is required", { status: 400 });
+      return new NextResponse("O ID da loja é obrigatório", { status: 400 });
     }
 
     const storeByUserId = await prismadb.store.findFirst({
@@ -38,7 +38,7 @@ export async function POST(
     });
 
     if (!storeByUserId) {
-      return new NextResponse("Unauthorized", { status: 405 });
+      return new NextResponse("Não autorizado", { status: 405 });
     }
 
     const category = await prismadb.category.create({
@@ -62,7 +62,7 @@ export async function GET(
 ) {
   try {
     if (!params.storeId) {
-      return new NextResponse("Store id is required", { status: 400 });
+      return new NextResponse("O ID da loja é obrigatório", { status: 400 });
     }
 
     const categories = await prismadb.category.findMany({

@@ -9,7 +9,7 @@ export async function GET(
 ) {
   try {
     if (!params.billboardId) {
-      return new NextResponse("Billboard id is required", { status: 400 });
+      return new NextResponse("O ID do outdoor é obrigatório", { status: 400 });
     }
 
     const billboard = await prismadb.billboard.findUnique({
@@ -33,11 +33,11 @@ export async function DELETE(
     const { userId } = auth();
 
     if (!userId) {
-      return new NextResponse("Unauthenticated", { status: 403 });
+      return new NextResponse("Não autenticado", { status: 403 });
     }
 
     if (!params.billboardId) {
-      return new NextResponse("Billboard id is required", { status: 400 });
+      return new NextResponse("O ID do outdoor é obrigatório", { status: 400 });
     }
 
     const storeByUserId = await prismadb.store.findFirst({
@@ -48,7 +48,7 @@ export async function DELETE(
     });
 
     if (!storeByUserId) {
-      return new NextResponse("Unauthorized", { status: 405 });
+      return new NextResponse("Não autorizado", { status: 405 });
     }
 
     const billboard = await prismadb.billboard.delete({
@@ -77,19 +77,19 @@ export async function PATCH(
     const { label, imageUrl } = body;
     
     if (!userId) {
-      return new NextResponse("Unauthenticated", { status: 403 });
+      return new NextResponse("Não autenticado", { status: 403 });
     }
 
     if (!label) {
-      return new NextResponse("Label is required", { status: 400 });
+      return new NextResponse("O rótulo é obrigatório", { status: 400 });
     }
 
     if (!imageUrl) {
-      return new NextResponse("Image URL is required", { status: 400 });
+      return new NextResponse("O URL da imagem é obrigatório", { status: 400 });
     }
 
     if (!params.billboardId) {
-      return new NextResponse("Billboard id is required", { status: 400 });
+      return new NextResponse("O ID do outdoor é obrigatório", { status: 400 });
     }
 
     const storeByUserId = await prismadb.store.findFirst({
@@ -100,7 +100,7 @@ export async function PATCH(
     });
 
     if (!storeByUserId) {
-      return new NextResponse("Unauthorized", { status: 405 });
+      return new NextResponse("Não autorizado", { status: 405 });
     }
 
     const billboard = await prismadb.billboard.update({

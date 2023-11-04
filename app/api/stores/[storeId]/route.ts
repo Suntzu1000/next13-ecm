@@ -15,15 +15,15 @@ export async function PATCH(
     const { name } = body;
 
     if (!userId) {
-      return new NextResponse("Unauthenticated", { status: 403 });
+      return new NextResponse("Não autorizado", { status: 403 });
     }
 
     if (!name) {
-      return new NextResponse("Name is required", { status: 400 });
+      return new NextResponse("Nome é obrigatório", { status: 400 });
     }
 
     if (!params.storeId) {
-      return new NextResponse("Store id is required", { status: 400 });
+      return new NextResponse("Id de Loja é obrigatório ", { status: 400 });
     }
 
     const store = await prismadb.store.updateMany({
@@ -52,11 +52,11 @@ export async function DELETE(
     const { userId } = auth();
 
     if (!userId) {
-      return new NextResponse("Unauthenticated", { status: 403 });
+      return new NextResponse("Não autorizado", { status: 403 });
     }
 
     if (!params.storeId) {
-      return new NextResponse("Store id is required", { status: 400 });
+      return new NextResponse("Id de Loja é obrigatório", { status: 400 });
     }
 
     const store = await prismadb.store.deleteMany({

@@ -24,14 +24,14 @@ export const ColorClient: React.FC<ColorClientProps> = ({
   return (
     <>
       <div className="flex items-center justify-between">
-        <Heading title={`Colors (${data.length})`} description="Manage colors for your products" />
+        <Heading title={`Cores (${data.length})`} description="Gerencie cores para seus produtos" />
         <Button onClick={() => router.push(`/${params.storeId}/colors/new`)}>
-          <Plus className="mr-2 h-4 w-4" /> Add New
+          <Plus className="mr-2 h-4 w-4" /> Add novo
         </Button>
       </div>
       <Separator />
       <DataTable searchKey="name" columns={columns} data={data} />
-      <Heading title="API" description="API Calls for Colors" />
+      <Heading title="API" description="Chamadas de API para cores" />
       <Separator />
       <ApiList entityName="colors" entityIdName="colorId" />
     </>

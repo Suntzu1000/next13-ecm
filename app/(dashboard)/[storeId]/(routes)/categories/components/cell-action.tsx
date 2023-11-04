@@ -35,10 +35,10 @@ export const CellAction: React.FC<CellActionProps> = ({
     try {
       setLoading(true);
       await axios.delete(`/api/${params.storeId}/categories/${data.id}`);
-      toast.success('Category deleted.');
+      toast.success('Categoria deletado.');
       router.refresh();
     } catch (error) {
-      toast.error('Make sure you removed all products using this category first.');
+      toast.error('Certifique-se de remover todos os produtos que usam esta categoria primeiro.');
     } finally {
       setOpen(false);
       setLoading(false);
@@ -47,7 +47,7 @@ export const CellAction: React.FC<CellActionProps> = ({
 
   const onCopy = (id: string) => {
     navigator.clipboard.writeText(id);
-    toast.success('Category ID copied to clipboard.');
+    toast.success('ID da categoria copiado para a área de transferência.');
   }
 
   return (
@@ -61,7 +61,7 @@ export const CellAction: React.FC<CellActionProps> = ({
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="h-8 w-8 p-0">
-            <span className="sr-only">Open menu</span>
+            <span className="sr-only">Abrir menu</span>
             <MoreHorizontal className="h-4 w-4" />
           </Button>
         </DropdownMenuTrigger>

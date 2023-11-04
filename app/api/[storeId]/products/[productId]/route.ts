@@ -9,7 +9,7 @@ export async function GET(
 ) {
   try {
     if (!params.productId) {
-      return new NextResponse("Product id is required", { status: 400 });
+      return new NextResponse("O ID do produto é obrigatório", { status: 400 });
     }
 
     const product = await prismadb.product.findUnique({
@@ -39,11 +39,11 @@ export async function DELETE(
     const { userId } = auth();
 
     if (!userId) {
-      return new NextResponse("Unauthenticated", { status: 403 });
+      return new NextResponse("Não autenticado", { status: 403 });
     }
 
     if (!params.productId) {
-      return new NextResponse("Product id is required", { status: 400 });
+      return new NextResponse("O ID do produto é obrigatório", { status: 400 });
     }
 
     const storeByUserId = await prismadb.store.findFirst({
@@ -54,7 +54,7 @@ export async function DELETE(
     });
 
     if (!storeByUserId) {
-      return new NextResponse("Unauthorized", { status: 405 });
+      return new NextResponse("Não autorizado", { status: 405 });
     }
 
     const product = await prismadb.product.delete({
@@ -83,35 +83,35 @@ export async function PATCH(
     const { name, price, categoryId, images, colorId, sizeId, isFeatured, isArchived } = body;
 
     if (!userId) {
-      return new NextResponse("Unauthenticated", { status: 403 });
+      return new NextResponse("Não autenticado", { status: 403 });
     }
 
     if (!params.productId) {
-      return new NextResponse("Product id is required", { status: 400 });
+      return new NextResponse("O ID do produto é obrigatório", { status: 400 });
     }
 
     if (!name) {
-      return new NextResponse("Name is required", { status: 400 });
+      return new NextResponse("O nome é obrigatório", { status: 400 });
     }
 
     if (!images || !images.length) {
-      return new NextResponse("Images are required", { status: 400 });
+      return new NextResponse("As imagens são obrigatórias", { status: 400 });
     }
 
     if (!price) {
-      return new NextResponse("Price is required", { status: 400 });
+      return new NextResponse("O preço é obrigatório", { status: 400 });
     }
 
     if (!categoryId) {
-      return new NextResponse("Category id is required", { status: 400 });
+      return new NextResponse("O ID da categoria é obrigatório", { status: 400 });
     }
 
     if (!colorId) {
-      return new NextResponse("Color id is required", { status: 400 });
+      return new NextResponse("O ID da cor é obrigatório", { status: 400 });
     }
 
     if (!sizeId) {
-      return new NextResponse("Size id is required", { status: 400 });
+      return new NextResponse("O ID do tamanho é obrigatório", { status: 400 });
     }
 
     const storeByUserId = await prismadb.store.findFirst({
@@ -122,7 +122,7 @@ export async function PATCH(
     });
 
     if (!storeByUserId) {
-      return new NextResponse("Unauthorized", { status: 405 });
+      return new NextResponse("Não autorizado", { status: 405 });
     }
 
     await prismadb.product.update({

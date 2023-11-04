@@ -34,10 +34,10 @@ export const CellAction: React.FC<CellActionProps> = ({
     try {
       setLoading(true);
       await axios.delete(`/api/${params.storeId}/colors/${data.id}`);
-      toast.success('Color deleted.');
+      toast.success('Cor deletada.');
       router.refresh();
     } catch (error) {
-      toast.error('Make sure you removed all products using this color first.');
+      toast.error('Certifique-se de remover todos os produtos que usam esta cor primeiro.');
     } finally {
       setOpen(false);
       setLoading(false);
@@ -46,7 +46,7 @@ export const CellAction: React.FC<CellActionProps> = ({
 
   const onCopy = (id: string) => {
     navigator.clipboard.writeText(id);
-    toast.success('Color ID copied to clipboard.');
+    toast.success('ID da cor copiado para a área de transferência.');
   }
 
   return (
@@ -60,12 +60,12 @@ export const CellAction: React.FC<CellActionProps> = ({
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="h-8 w-8 p-0">
-            <span className="sr-only">Open menu</span>
+            <span className="sr-only">Abrir menu</span>
             <MoreHorizontal className="h-4 w-4" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuLabel>Actions</DropdownMenuLabel>
+          <DropdownMenuLabel>Ações</DropdownMenuLabel>
           <DropdownMenuItem
             onClick={() => onCopy(data.id)}
           >
@@ -74,12 +74,12 @@ export const CellAction: React.FC<CellActionProps> = ({
           <DropdownMenuItem
             onClick={() => router.push(`/${params.storeId}/colors/${data.id}`)}
           >
-            <Edit className="mr-2 h-4 w-4" /> Update
+            <Edit className="mr-2 h-4 w-4" /> Atualizar
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => setOpen(true)}
           >
-            <Trash className="mr-2 h-4 w-4" /> Delete
+            <Trash className="mr-2 h-4 w-4" /> Deletar
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

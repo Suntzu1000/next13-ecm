@@ -15,35 +15,35 @@ export async function POST(
     const { name, price, categoryId, colorId, sizeId, images, isFeatured, isArchived } = body;
 
     if (!userId) {
-      return new NextResponse("Unauthenticated", { status: 403 });
+      return new NextResponse("Não autenticado", { status: 403 });
     }
 
     if (!name) {
-      return new NextResponse("Name is required", { status: 400 });
+      return new NextResponse("O nome é obrigatório", { status: 400 });
     }
 
     if (!images || !images.length) {
-      return new NextResponse("Images are required", { status: 400 });
+      return new NextResponse("As imagens são obrigatórias", { status: 400 });
     }
 
     if (!price) {
-      return new NextResponse("Price is required", { status: 400 });
+      return new NextResponse("Preço é obrigatório", { status: 400 });
     }
 
     if (!categoryId) {
-      return new NextResponse("Category id is required", { status: 400 });
+      return new NextResponse("O ID da categoria é obrigatório", { status: 400 });
     }
 
     if (!colorId) {
-      return new NextResponse("Color id is required", { status: 400 });
+      return new NextResponse("O ID da cor é obrigatório", { status: 400 });
     }
 
     if (!sizeId) {
-      return new NextResponse("Size id is required", { status: 400 });
+      return new NextResponse("O ID do tamanho é obrigatório", { status: 400 });
     }
 
     if (!params.storeId) {
-      return new NextResponse("Store id is required", { status: 400 });
+      return new NextResponse("O ID da loja é obrigatório", { status: 400 });
     }
 
     const storeByUserId = await prismadb.store.findFirst({
@@ -54,7 +54,7 @@ export async function POST(
     });
 
     if (!storeByUserId) {
-      return new NextResponse("Unauthorized", { status: 405 });
+      return new NextResponse("Não autorizado", { status: 405 });
     }
 
     const product = await prismadb.product.create({
@@ -96,7 +96,7 @@ export async function GET(
     const isFeatured = searchParams.get('isFeatured');
 
     if (!params.storeId) {
-      return new NextResponse("Store id is required", { status: 400 });
+      return new NextResponse("O ID da loja é obrigatório", { status: 400 });
     }
 
     const products = await prismadb.product.findMany({

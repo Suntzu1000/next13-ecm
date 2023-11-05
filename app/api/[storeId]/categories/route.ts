@@ -1,6 +1,4 @@
 import { NextResponse } from 'next/server';
-import { auth } from '@clerk/nextjs';
-
 import prismadb from '@/lib/prismadb';
  
 export async function POST(
@@ -8,15 +6,11 @@ export async function POST(
   { params }: { params: { storeId: string } }
 ) {
   try {
-    const { userId } = auth();
 
     const body = await req.json();
 
     const { name, billboardId } = body;
 
-    if (!userId) {
-      return new NextResponse("Não autenticado", { status: 403 });
-    }
 
     if (!name) {
       return new NextResponse("Nome obrigatório", { status: 400 });
@@ -33,7 +27,6 @@ export async function POST(
     const storeByUserId = await prismadb.store.findFirst({
       where: {
         id: params.storeId,
-        userId,
       }
     });
 

@@ -1,6 +1,4 @@
 import { NextResponse } from "next/server";
-import { auth } from "@clerk/nextjs";
-
 import prismadb from "@/lib/prismadb";
 
 export async function GET(
@@ -36,11 +34,7 @@ export async function DELETE(
   { params }: { params: { productId: string, storeId: string } }
 ) {
   try {
-    const { userId } = auth();
 
-    if (!userId) {
-      return new NextResponse("Não autenticado", { status: 403 });
-    }
 
     if (!params.productId) {
       return new NextResponse("O ID do produto é obrigatório", { status: 400 });
@@ -49,7 +43,6 @@ export async function DELETE(
     const storeByUserId = await prismadb.store.findFirst({
       where: {
         id: params.storeId,
-        userId
       }
     });
 
@@ -76,15 +69,11 @@ export async function PATCH(
   { params }: { params: { productId: string, storeId: string } }
 ) {
   try {
-    const { userId } = auth();
 
     const body = await req.json();
 
     const { name, price, categoryId, images, colorId, sizeId, isFeatured, isArchived } = body;
 
-    if (!userId) {
-      return new NextResponse("Não autenticado", { status: 403 });
-    }
 
     if (!params.productId) {
       return new NextResponse("O ID do produto é obrigatório", { status: 400 });
@@ -117,7 +106,6 @@ export async function PATCH(
     const storeByUserId = await prismadb.store.findFirst({
       where: {
         id: params.storeId,
-        userId
       }
     });
 

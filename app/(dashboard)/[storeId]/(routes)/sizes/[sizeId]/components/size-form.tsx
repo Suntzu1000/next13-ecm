@@ -44,10 +44,10 @@ export const SizeForm: React.FC<SizeFormProps> = ({
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const title = initialData ? 'Edit size' : 'Create size';
-  const description = initialData ? 'Edit a size.' : 'Add a new size';
-  const toastMessage = initialData ? 'Size updated.' : 'Size created.';
-  const action = initialData ? 'Save changes' : 'Create';
+  const title = initialData ? 'Editar tamanho' : 'Criar tamanho';
+  const description = initialData ? 'Editar o tamanho.' : 'Add um novo tamanho';
+  const toastMessage = initialData ? 'Tamanho atualizado.' : 'Tamanho criado.';
+  const action = initialData ? 'Salvar mudanças' : 'Criar';
 
   const form = useForm<SizeFormValues>({
     resolver: zodResolver(formSchema),
@@ -80,7 +80,7 @@ export const SizeForm: React.FC<SizeFormProps> = ({
       await axios.delete(`/api/${params.storeId}/sizes/${params.sizeId}`);
       router.refresh();
       router.push(`/${params.storeId}/sizes`);
-      toast.success('Size deleted.');
+      toast.success('Tamanho deletado.');
     } catch (error: any) {
       toast.error('Certifique-se de remover todos os produtos usando este tamanho primeiro.');
     } finally {
@@ -119,9 +119,9 @@ export const SizeForm: React.FC<SizeFormProps> = ({
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel>Nome</FormLabel>
                   <FormControl>
-                    <Input disabled={loading} placeholder="Size name" {...field} />
+                    <Input disabled={loading} placeholder="Nome de tamanho" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -132,9 +132,9 @@ export const SizeForm: React.FC<SizeFormProps> = ({
               name="value"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Value</FormLabel>
+                  <FormLabel>Valor</FormLabel>
                   <FormControl>
-                    <Input disabled={loading} placeholder="Size value" {...field} />
+                    <Input disabled={loading} placeholder="Valor de tamanho" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

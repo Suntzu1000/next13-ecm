@@ -30,11 +30,6 @@ export async function DELETE(
   { params }: { params: { colorId: string, storeId: string } }
 ) {
   try {
-    const { userId } = auth();
-
-    if (!userId) {
-      return new NextResponse("Não autenticado", { status: 403 });
-    }
 
     if (!params.colorId) {
       return new NextResponse("O ID da cor é obrigatório", { status: 400 });
@@ -43,7 +38,6 @@ export async function DELETE(
     const storeByUserId = await prismadb.store.findFirst({
       where: {
         id: params.storeId,
-        userId
       }
     });
 
@@ -70,15 +64,10 @@ export async function PATCH(
   { params }: { params: { colorId: string, storeId: string } }
 ) {
   try {
-    const { userId } = auth();
 
     const body = await req.json();
 
     const { name, value } = body;
-
-    if (!userId) {
-      return new NextResponse("Não autenticado", { status: 403 });
-    }
 
     if (!name) {
       return new NextResponse("O nome é obrigatório", { status: 400 });
@@ -96,7 +85,6 @@ export async function PATCH(
     const storeByUserId = await prismadb.store.findFirst({
       where: {
         id: params.storeId,
-        userId
       }
     });
 

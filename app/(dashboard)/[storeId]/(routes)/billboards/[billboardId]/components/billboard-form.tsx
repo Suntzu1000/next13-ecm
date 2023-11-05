@@ -134,7 +134,7 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
             name="imageUrl"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Background image</FormLabel>
+                <FormLabel>Imagem</FormLabel>
                 <FormControl>
                   <ImageUpload
                     value={field.value ? [field.value] : []}
@@ -153,7 +153,7 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
               name="label"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Label</FormLabel>
+                  <FormLabel>Nome de Publicação</FormLabel>
                   <FormControl>
                     <Input
                       disabled={loading}
